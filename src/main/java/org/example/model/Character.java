@@ -68,4 +68,51 @@ public class Character {
         return wisdom;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public void setCharacterClass(String characterClass) {
+        CharacterClass = characterClass;
+    }
+
+    public void setLevel(int level) {
+        Level = level;
+    }
+
+    public void setActualHealth(int actualHealth) {
+        ActualHealth = actualHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        MaxHealth = maxHealth;
+    }
+
+    public void setStrength(int strength) {
+        Strength = strength;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public void setConstitution(int constitution) {
+        this.constitution = constitution;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setWisdom(int wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public void setCharisma(int charisma) {
+        this.charisma = charisma;
+    }
 }
