@@ -1,6 +1,10 @@
 package org.example.model;
 
 
+import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Character {
     /**
      *
@@ -13,12 +17,20 @@ public class Character {
     private  int MaxHealth;
     private  int ActualHealth;
 
-    private int Strength;
-    private int dexterity;
-    private int constitution;
-    private int intelligence;
-    private int wisdom;
-    private int charisma;
+    public Character() {
+
+    }
+    public Character(String name, String race, String characterClass, int level, int maxHealth, int actualHealth) {
+        this.name = name;
+        this.race = race;
+        CharacterClass = characterClass;
+        Level = 1;
+        MaxHealth = 10;
+        ActualHealth = 10;
+
+    }
+
+
 
     public String getName() {
         return name;
@@ -44,29 +56,6 @@ public class Character {
         return ActualHealth;
     }
 
-    public int getStrength() {
-        return Strength;
-    }
-
-    public int getDexterity() {
-        return dexterity;
-    }
-
-    public int getConstitution() {
-        return constitution;
-    }
-
-    public int getIntelligence() {
-        return intelligence;
-    }
-
-    public int getCharisma() {
-        return charisma;
-    }
-
-    public int getWisdom() {
-        return wisdom;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -92,27 +81,6 @@ public class Character {
         MaxHealth = maxHealth;
     }
 
-    public void setStrength(int strength) {
-        Strength = strength;
-    }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
-    }
 
-    public void setConstitution(int constitution) {
-        this.constitution = constitution;
-    }
-
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public void setWisdom(int wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    public void setCharisma(int charisma) {
-        this.charisma = charisma;
-    }
 }

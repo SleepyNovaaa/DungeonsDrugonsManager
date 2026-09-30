@@ -4,6 +4,7 @@ import org.example.model.Monster;
 import org.example.model.Object;
 import org.example.model.PNJ;
 import org.example.model.Spell;
+import org.example.service.CharacterService;
 
 /**
  * Prueba manual básica de las clases del modelo. Ejecuta este main desde el IDE
@@ -26,7 +27,7 @@ public class Main {
         check("Mercader".equals(pnj.getOcupation()), "PNJ.getOcupation");
         checks += 3;
 
-        Object object = new Object("Poción", "Restaura salud.");
+        Object object = new Object("Poción", "Restaura salud.","");
         check("Poción".equals(object.getName()), "Object.getName");
         check("Restaura salud.".equals(object.getDescription()), "Object.getDescription");
         checks += 2;
@@ -46,25 +47,39 @@ public class Main {
         character.setLevel(5);
         character.setMaxHealth(32);
         character.setActualHealth(27);
-        character.setStrength(8);
-        character.setDexterity(14);
-        character.setConstitution(12);
-        character.setIntelligence(18);
-        character.setWisdom(13);
-        character.setCharisma(10);
+
         check("Aria".equals(character.getName()), "Character name setter/getter");
         check("Elfa".equals(character.getRace()), "Character race setter/getter");
         check("Maga".equals(character.getCharacterClass()), "Character class setter/getter");
         check(character.getLevel() == 5, "Character level setter/getter");
         check(character.getMaxHealth() == 32, "Character max health setter/getter");
         check(character.getActualHealth() == 27, "Character actual health setter/getter");
-        check(character.getStrength() == 8, "Character strength setter/getter");
-        check(character.getDexterity() == 14, "Character dexterity setter/getter");
-        check(character.getConstitution() == 12, "Character constitution setter/getter");
-        check(character.getIntelligence() == 18, "Character intelligence setter/getter");
-        check(character.getWisdom() == 13, "Character wisdom setter/getter");
-        check(character.getCharisma() == 10, "Character charisma setter/getter");
+
         checks += 12;
+
+        CharacterService characterService = new CharacterService();
+        check(characterService.isAlive(character), "CharacterService.isAlive con salud positiva");
+        characterService.takeDamage(character, 7);
+        check(character.getActualHealth() == 20, "CharacterService.takeDamage resta salud");
+        characterService.Heal(character, 20);
+        check(character.getActualHealth() == 32, "CharacterService.Heal limita a la salud máxima");
+        characterService.Levelup(character);
+        check(character.getLevel() == 6, "CharacterService.Levelup aumenta nivel");
+        check(character.getMaxHealth() == 37 && character.getActualHealth() == 37,
+                "CharacterService.Levelup aumenta y restaura salud");
+        characterService.takeDamage(character, 50);
+        check(character.getActualHealth() == 0, "CharacterService.takeDamage no baja de cero");
+        check(!characterService.isAlive(character), "CharacterService.isAlive con cero salud");
+        checks += 7;
+
+        boolean rejectedNegativeDamage = false;
+        try {
+            characterService.takeDamage(character, -1);
+        } catch (IllegalArgumentException expected) {
+            rejectedNegativeDamage = true;
+        }
+        check(rejectedNegativeDamage, "CharacterService.takeDamage rechaza daño negativo");
+        checks++;
 
         Campaing campaign = new Campaing("La cripta", "Aventura de prueba.");
         check("La cripta".equals(campaign.getName()), "Campaing.getName");
